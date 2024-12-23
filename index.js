@@ -35,33 +35,37 @@ if (redRadio && whiteRadio && greenRadio) {
   });
 }
 
-const input = document.querySelector(".name-input");
-const output = document.querySelector(".name-output");
+const input = document.querySelector("#name-input");
+const output = document.querySelector("#name-output");
 
-if (input && output) {
-  input.addEventListener("input", () => {
-    output.textContent =
-      input.value.trim() === "" ? "незнайомець" : input.value;
-  });
-}
+input.addEventListener("input", () => {
+  if (input.value === "") {
+    output.textContent = "незнайомець";
+  } else {
+    output.textContent = input.value;
+  }
+});
 
-const inputElement = document.querySelector(".validation-input");
-if (inputElement) {
-  inputElement.addEventListener("blur", (event) => {
-    if (event.target.value.length !== parseInt(event.target.dataset.length)) {
-      event.target.classList.add("invalid");
-      event.target.classList.remove("valid");
-    } else {
-      event.target.classList.remove("invalid");
-      event.target.classList.add("valid");
-    }
-  });
-}
+const inputELement = document.querySelector("#validation-input");
 
-const range = document.querySelector(".font-size-control");
-const text = document.querySelector(".text");
-if (range && text) {
-  range.addEventListener("input", (event) => {
-    text.style.fontSize = `${event.target.value}px`;
-  });
-}
+inputELement.addEventListener("blur", (event) => {
+  if (event.target.value.length > event.target.dataset.length) {
+    event.target.classList.add("invalid");
+    event.target.classList.remove("valid");
+  }
+  if (event.target.value.length < event.target.dataset.length) {
+    event.target.classList.add("invalid");
+    event.target.classList.remove("valid");
+  }  else {
+    event.target.classList.remove("invalid");
+    event.target.classList.add("valid");
+  }
+
+});
+
+const range = document.querySelector("#font-size-control");
+const text = document.querySelector("#text");
+
+range.addEventListener("input", (event) => {
+  text.style.fontSize = `${event.target.value}px`;
+});
